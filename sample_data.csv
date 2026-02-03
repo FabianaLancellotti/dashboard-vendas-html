@@ -1,0 +1,93 @@
+﻿Data da Compra;Produto;Quantidade; Valor Total (R$) ;Fornecedor;Condição de Pagamento;Status da Entrega
+01/01/2026;Mouse Gamer RGB;24; R$ 2.040,00 ;Fornecedor E;30 dias;Em trânsito
+05/01/2026;Câmera Digital Profissional;1; R$ 7.500,00 ;Fornecedor B;90 dias;Entregue
+09/01/2026;"Smart TV 55""";3; R$ 9.600,00 ;Fornecedor A;60 dias;Cancelado
+13/01/2026;Monitor Ultrawide;1; R$ 2.300,00 ;Fornecedor B;90 dias;Em trânsito
+17/01/2026;Monitor Ultrawide;3; R$ 6.900,00 ;Fornecedor E;90 dias;Entregue
+21/01/2026;Notebook Gamer 7;2; R$ 11.600,00 ;Fornecedor C;90 dias;Em trânsito
+25/01/2026;Tablet Pro;1; R$ 1.800,00 ;Fornecedor A;60 dias;Cancelado
+29/01/2026;"Smart TV 55""";1; R$ 3.200,00 ;Fornecedor F;À vista;Entregue
+02/02/2026;Monitor Ultrawide;2; R$ 4.600,00 ;Fornecedor D;60 dias;Em trânsito
+06/02/2026;"Smart TV 55""";2; R$ 6.400,00 ;Fornecedor C;90 dias;Em trânsito
+10/02/2026;Mouse Gamer RGB;28; R$ 2.380,00 ;Fornecedor D;90 dias;Entregue
+14/02/2026;Mouse Gamer RGB;14; R$ 1.190,00 ;Fornecedor D;90 dias;Entregue
+18/02/2026;"Smart TV 55""";2; R$ 6.400,00 ;Fornecedor F;90 dias;Entregue
+22/02/2026;Tablet Pro;1; R$ 1.800,00 ;Fornecedor E;90 dias;Entregue
+26/02/2026;Smartphone 10;8; R$ 20.000,00 ;Fornecedor D;60 dias;Em trânsito
+02/03/2026;"Smart TV 55""";3; R$ 9.600,00 ;Fornecedor F;90 dias;Em trânsito
+06/03/2026;Smartphone 10;3; R$ 7.500,00 ;Fornecedor D;60 dias;Entregue
+10/03/2026;Tablet Pro;1; R$ 1.800,00 ;Fornecedor E;90 dias;Em trânsito
+14/03/2026;"Smart TV 55""";3; R$ 9.600,00 ;Fornecedor C;90 dias;Em trânsito
+18/03/2026;Fone de Ouvido sem Fio;13; R$ 1.950,00 ;Fornecedor F;À vista;Em trânsito
+22/03/2026;Monitor Ultrawide;1; R$ 2.300,00 ;Fornecedor B;90 dias;Entregue
+26/03/2026;Smartphone 10;5; R$ 12.500,00 ;Fornecedor E;60 dias;Entregue
+30/03/2026;Fone de Ouvido sem Fio;29; R$ 4.350,00 ;Fornecedor F;À vista;Entregue
+03/04/2026;Smartphone 10;8; R$ 20.000,00 ;Fornecedor E;90 dias;Em trânsito
+07/04/2026;Câmera Digital Profissional;1; R$ 7.500,00 ;Fornecedor E;90 dias;Em trânsito
+11/04/2026;Console de Videogame;6; R$ 24.000,00 ;Fornecedor B;60 dias;Cancelado
+15/04/2026;Notebook Gamer 7;4; R$ 23.200,00 ;Fornecedor E;À vista;Em trânsito
+19/04/2026;Fone de Ouvido sem Fio;10; R$ 1.500,00 ;Fornecedor C;À vista;Entregue
+23/04/2026;Fone de Ouvido sem Fio;27; R$ 4.050,00 ;Fornecedor F;À vista;Em trânsito
+27/04/2026;Mouse Gamer RGB;10; R$ 850,00 ;Fornecedor F;30 dias;Entregue
+01/05/2026;Roteador Wi-Fi;7; R$ 2.450,00 ;Fornecedor B;À vista;Entregue
+05/05/2026;Roteador Wi-Fi;8; R$ 2.800,00 ;Fornecedor E;À vista;Em trânsito
+09/05/2026;Monitor Ultrawide;1; R$ 2.300,00 ;Fornecedor D;90 dias;Em trânsito
+13/05/2026;Smartphone 10;9; R$ 22.500,00 ;Fornecedor D;30 dias;Em trânsito
+17/05/2026;Fone de Ouvido sem Fio;26; R$ 3.900,00 ;Fornecedor F;60 dias;Cancelado
+21/05/2026;Tablet Pro;2; R$ 3.600,00 ;Fornecedor A;À vista;Entregue
+25/05/2026;Câmera Digital Profissional;2; R$ 15.000,00 ;Fornecedor F;90 dias;Em trânsito
+29/05/2026;Fone de Ouvido sem Fio;11; R$ 1.650,00 ;Fornecedor C;30 dias;Cancelado
+02/06/2026;Roteador Wi-Fi;5; R$ 1.750,00 ;Fornecedor E;60 dias;Entregue
+06/06/2026;Fone de Ouvido sem Fio;29; R$ 4.350,00 ;Fornecedor B;60 dias;Entregue
+10/06/2026;Notebook Gamer 7;4; R$ 23.200,00 ;Fornecedor B;60 dias;Entregue
+14/06/2026;Fone de Ouvido sem Fio;14; R$ 2.100,00 ;Fornecedor B;90 dias;Cancelado
+18/06/2026;"Smart TV 55""";1; R$ 3.200,00 ;Fornecedor F;90 dias;Entregue
+22/06/2026;Notebook Gamer 7;3; R$ 17.400,00 ;Fornecedor E;60 dias;Entregue
+26/06/2026;Câmera Digital Profissional;1; R$ 7.500,00 ;Fornecedor F;À vista;Cancelado
+30/06/2026;Mouse Gamer RGB;10; R$ 850,00 ;Fornecedor E;À vista;Entregue
+04/07/2026;Console de Videogame;8; R$ 32.000,00 ;Fornecedor A;30 dias;Entregue
+08/07/2026;Fone de Ouvido sem Fio;26; R$ 3.900,00 ;Fornecedor B;90 dias;Em trânsito
+12/07/2026;Fone de Ouvido sem Fio;20; R$ 3.000,00 ;Fornecedor A;90 dias;Entregue
+16/07/2026;"Smart TV 55""";1; R$ 3.200,00 ;Fornecedor F;À vista;Entregue
+20/07/2026;Monitor Ultrawide;3; R$ 6.900,00 ;Fornecedor F;90 dias;Entregue
+24/07/2026;Roteador Wi-Fi;8; R$ 2.800,00 ;Fornecedor E;60 dias;Cancelado
+28/07/2026;Notebook Gamer 7;4; R$ 23.200,00 ;Fornecedor A;90 dias;Em trânsito
+01/08/2026;Smartphone 10;9; R$ 22.500,00 ;Fornecedor E;90 dias;Entregue
+05/08/2026;"Smart TV 55""";2; R$ 6.400,00 ;Fornecedor A;À vista;Entregue
+09/08/2026;Fone de Ouvido sem Fio;22; R$ 3.300,00 ;Fornecedor A;90 dias;Entregue
+13/08/2026;"Smart TV 55""";1; R$ 3.200,00 ;Fornecedor B;90 dias;Cancelado
+17/08/2026;Monitor Ultrawide;2; R$ 4.600,00 ;Fornecedor F;À vista;Em trânsito
+21/08/2026;"Smart TV 55""";1; R$ 3.200,00 ;Fornecedor B;90 dias;Em trânsito
+25/08/2026;Monitor Ultrawide;3; R$ 6.900,00 ;Fornecedor B;À vista;Em trânsito
+29/08/2026;Câmera Digital Profissional;1; R$ 7.500,00 ;Fornecedor B;À vista;Entregue
+02/09/2026;Notebook Gamer 7;4; R$ 23.200,00 ;Fornecedor C;30 dias;Cancelado
+06/09/2026;Console de Videogame;3; R$ 12.000,00 ;Fornecedor C;À vista;Em trânsito
+10/09/2026;Câmera Digital Profissional;2; R$ 15.000,00 ;Fornecedor C;90 dias;Em trânsito
+14/09/2026;Fone de Ouvido sem Fio;21; R$ 3.150,00 ;Fornecedor C;60 dias;Em trânsito
+18/09/2026;Fone de Ouvido sem Fio;21; R$ 3.150,00 ;Fornecedor D;60 dias;Cancelado
+22/09/2026;Mouse Gamer RGB;29; R$ 2.465,00 ;Fornecedor B;90 dias;Entregue
+26/09/2026;Câmera Digital Profissional;1; R$ 7.500,00 ;Fornecedor B;60 dias;Entregue
+30/09/2026;Notebook Gamer 7;2; R$ 11.600,00 ;Fornecedor B;90 dias;Entregue
+04/10/2026;Monitor Ultrawide;3; R$ 6.900,00 ;Fornecedor C;90 dias;Em trânsito
+08/10/2026;Console de Videogame;4; R$ 16.000,00 ;Fornecedor E;À vista;Em trânsito
+12/10/2026;Notebook Gamer 7;2; R$ 11.600,00 ;Fornecedor D;À vista;Entregue
+16/10/2026;Roteador Wi-Fi;9; R$ 3.150,00 ;Fornecedor C;À vista;Cancelado
+20/10/2026;Câmera Digital Profissional;1; R$ 7.500,00 ;Fornecedor B;90 dias;Em trânsito
+24/10/2026;Tablet Pro;2; R$ 3.600,00 ;Fornecedor F;60 dias;Em trânsito
+28/10/2026;Câmera Digital Profissional;2; R$ 15.000,00 ;Fornecedor E;90 dias;Em trânsito
+01/11/2026;Notebook Gamer 7;2; R$ 11.600,00 ;Fornecedor E;90 dias;Entregue
+05/11/2026;Console de Videogame;2; R$ 8.000,00 ;Fornecedor C;90 dias;Entregue
+09/11/2026;Smartphone 10;10; R$ 25.000,00 ;Fornecedor F;90 dias;Entregue
+13/11/2026;Mouse Gamer RGB;26; R$ 2.210,00 ;Fornecedor E;90 dias;Entregue
+17/11/2026;Tablet Pro;2; R$ 3.600,00 ;Fornecedor F;90 dias;Entregue
+21/11/2026;Câmera Digital Profissional;2; R$ 15.000,00 ;Fornecedor D;À vista;Em trânsito
+25/11/2026;Monitor Ultrawide;3; R$ 6.900,00 ;Fornecedor A;À vista;Entregue
+29/11/2026;Roteador Wi-Fi;9; R$ 3.150,00 ;Fornecedor D;90 dias;Em trânsito
+03/12/2026;Câmera Digital Profissional;1; R$ 7.500,00 ;Fornecedor D;90 dias;Em trânsito
+07/12/2026;"Smart TV 55""";2; R$ 6.400,00 ;Fornecedor F;90 dias;Entregue
+11/12/2026;Notebook Gamer 7;3; R$ 17.400,00 ;Fornecedor F;30 dias;Em trânsito
+15/12/2026;Câmera Digital Profissional;2; R$ 15.000,00 ;Fornecedor C;90 dias;Em trânsito
+19/12/2026;Câmera Digital Profissional;1; R$ 7.500,00 ;Fornecedor A;90 dias;Entregue
+23/12/2026;Roteador Wi-Fi;9; R$ 3.150,00 ;Fornecedor E;60 dias;Em trânsito
+27/12/2026;Notebook Gamer 7;2; R$ 11.600,00 ;Fornecedor C;90 dias;Em trânsito
+31/12/2026;Console de Videogame;3; R$ 12.000,00 ;Fornecedor E;60 dias;Cancelado

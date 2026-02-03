@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Dashboard de Vendas</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+
+<style>
+/* ======== BASE ======== */
+body {
+    font-family: "Work Sans", sans-serif;
+    margin: 0;
+    padding: 20px;
+    background: #f4f6f8;
+    color: #333;
+}
+
+h1 {
+    color: #1c5db6;
+    margin-bottom: 20px;
+}
+
+/* ======== UPLOAD ======== */
+.upload {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.upload-label {
+    background: #2f80ed;
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+#fileInput {
+    display: none;
+}
+
+.file-name {
+    font-size: 12px;
+    color: #666;
+}
+
+/* ======== KPI CARDS ======== */
+.kpis {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.kpi-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05), 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.kpi-card span {
+    font-size: 12px;
+    color: #777;
+}
+
+.kpi-card strong {
+    display: block;
+    margin-top: 5px;
+    font-size: 22px;
+    color: #1c5db6;
+}
+
+/* ======== FILTRO ======== */
+.filters {
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap:15px;
+    background:#fff;
+    padding:15px;
+    border-radius:8px;
+    margin-bottom:20px;
+}
+.filters label {
+    font-size:12px;
+    font-weight:bold;
+}
+.filters select, .filters input {
+    width:100%;
+    padding:6px;
+    box-sizing: border-box;
+    margin-top: 5px;
+}
+/* ======== GRÁFICOS ======== */
+.charts {
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap:30px;
+    max-width: 1400px;
+    margin: 0 auto 20px auto;
+}
+.card {
+    background:#fff;
+    padding:10px;
+    border-radius:8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.card canvas {
+    height:280px !important;
+}
+
+/* ======== TABELA ======== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+}
+
+th {
+    background: #1c5db6;
+    color: #fff;
+}
+</style>
+</head>
+
+<body>
+
+<h1>📊 Dashboard de Vendas</h1>
+
+<div class="upload">
+    <label for="fileInput" class="upload-label">Importar CSV</label>
+    <input type="file" id="fileInput" accept=".csv">
+    <span id="nomeArquivo" class="file-name"></span>
+</div>
+
+<div class="kpis">
+    <div class="kpi-card">
+        <span>Total de Vendas</span>
+        <strong id="kpiTotalVendas">0</strong>
+    </div>
+    <div class="kpi-card">
+        <span>Faturamento Total</span>
+        <strong id="kpiFaturamento">R$ 0</strong>
+    </div>
+    <div class="kpi-card">
+        <span>Ticket Médio</span>
+        <strong id="kpiTicket">R$ 0</strong>
+    </div>
+</div>
+
+<div class="filters">
+    <div>
+        <label>Período</label>
+        <input type="date" id="filtroInicio">
+        <input type="date" id="filtroFim">
+    </div>
+    <div>
+        <label>Produto</label>
+        <select id="filtroProduto"><option value="">Todos</option></select>
+    </div>
+    <div>
+        <label>Fornecedor</label>
+        <select id="filtroFornecedor"><option value="">Todos</option></select>
+    </div>
+    <div>
+        <label>Status</label>
+        <select id="filtroStatus"><option value="">Todos</option></select>
+    </div> 
+</div>
+
+<div class="charts">
+    <div class="card"><canvas id="vendasData"></canvas></div>
+    <div class="card"><canvas id="vendasProduto"></canvas></div>
+    <div class="card"><canvas id="quantidadeFornecedor"></canvas></div>
+    <div class="card"><canvas id="statusEntrega"></canvas></div>
+    </div>
+
+<table id="tabela" class="display" style="width:100%"></table>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    const fileInput = document.getElementById("fileInput");
+    let dadosOriginais = [];
+    let charts = [];
+
+    fileInput.addEventListener("change", e => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        Papa.parse(file, {
+            header: true,
+            skipEmptyLines: true,
+            complete: r => prepararDados(r.data)
+        });
+    });
+
+    function normalizar(t) {
+        return t.toLowerCase()
+                .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+                .trim();
+    }
+
+    function prepararDados(dados) {
+        const colunas = Object.keys(dados[0]).reduce((a, k) => {
+            a[normalizar(k)] = k;
+            return a;
+        }, {});
+
+        dadosOriginais = dados.map(d => {
+            const valor = d[colunas["valor total (r$)"]]
+                .replace("R$", "")
+                .replace(/\./g, "")
+                .replace(",", ".");
+
+            // Converte data de DD/MM/AAAA para AAAA-MM-DD para funcionar nos filtros e ordenação
+            const partesData = d[colunas["data da compra"]].split('/');
+            const dataFormatada = partesData.length === 3 ? `${partesData[2]}-${partesData[1]}-${partesData[0]}` : d[colunas["data da compra"]];
+
+            return {
+                produto: d[colunas["produto"]],
+                fornecedor: d[colunas["fornecedor"]],
+                status: d[colunas["status da entrega"]],
+                data: dataFormatada,
+                quantidade: Number(d[colunas["quantidade"]]),
+                valor: Number(valor)
+            };
+        });
+
+        popularFiltros();
+        atualizarDashboard(dadosOriginais);
+    }
+
+    function popularFiltros() {
+        const preencher = (id, campo) => {
+            const s = document.getElementById(id);
+            s.innerHTML = '<option value="">Todos</option>';
+            [...new Set(dadosOriginais.map(d => d[campo]))]
+                .forEach(v => {
+                    const o = document.createElement("option");
+                    o.value = v;
+                    o.textContent = v;
+                    s.appendChild(o);
+                });
+        };
+        preencher("filtroProduto", "produto");
+        preencher("filtroFornecedor", "fornecedor");
+        preencher("filtroStatus", "status");
+    }
+
+    ["filtroProduto","filtroFornecedor","filtroStatus","filtroInicio","filtroFim"]
+        .forEach(id => document.getElementById(id).addEventListener("change", aplicarFiltros));
+
+    function aplicarFiltros() {
+        let d = [...dadosOriginais];
+        if (filtroProduto.value) d = d.filter(x => x.produto === filtroProduto.value);
+        if (filtroFornecedor.value) d = d.filter(x => x.fornecedor === filtroFornecedor.value);
+        if (filtroStatus.value) d = d.filter(x => x.status === filtroStatus.value);
+        if (filtroInicio.value) d = d.filter(x => x.data >= filtroInicio.value);
+        if (filtroFim.value) d = d.filter(x => x.data <= filtroFim.value);
+        atualizarDashboard(d);
+    }
+
+    function atualizarDashboard(dados) {
+
+        // Atualiza KPIs
+        const totalVendas = dados.length;
+        const faturamentoTotal = dados.reduce((acc, curr) => acc + curr.valor, 0);
+        const ticketMedio = totalVendas ? faturamentoTotal / totalVendas : 0;
+
+        document.getElementById("kpiTotalVendas").innerText = totalVendas;
+        document.getElementById("kpiFaturamento").innerText = faturamentoTotal.toLocaleString("pt-BR", {style: 'currency', currency: 'BRL'});
+        document.getElementById("kpiTicket").innerText = ticketMedio.toLocaleString("pt-BR", {style: 'currency', currency: 'BRL'});
+
+        charts.forEach(c => c.destroy());
+        charts = [];
+
+        const agrupar = (c, fn) =>
+            dados.reduce((a, x) => {
+                a[x[c]] = (a[x[c]] || 0) + fn(x);
+                return a;
+            }, {});
+
+        const cores = [
+            '#36a2eb', '#ff6384', '#4bc0c0', '#ff9f40', '#9966ff', '#ffcd56', '#c9cbcf',
+            '#2f80ed', '#219653', '#f2994a', '#eb5757', '#56ccf2', '#6fcf97', '#bb6bd9'
+        ];
+
+        charts.push(new Chart(vendasProduto, {
+            type:"bar",
+            data:{labels:Object.keys(agrupar("produto",x=>x.valor)),
+                  datasets:[{label:"Vendas (R$)",data:Object.values(agrupar("produto",x=>x.valor)), backgroundColor: cores}]},
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Vendas por Produto (R$)'
+                    },
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        }));
+
+        charts.push(new Chart(quantidadeFornecedor, {
+            type:"bar",
+            data:{labels:Object.keys(agrupar("fornecedor",x=>x.quantidade)),
+                  datasets:[{label:"Quantidade",data:Object.values(agrupar("fornecedor",x=>x.quantidade)), backgroundColor: cores}]},
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Quantidade por Fornecedor'
+                    },
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        }));
+
+        charts.push(new Chart(statusEntrega, {
+            type:"pie",
+            data:{labels:Object.keys(agrupar("status",()=>1)),
+                  datasets:[{data:Object.values(agrupar("status",()=>1))}]},
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Status da Entrega'
+                    },
+                    legend: {
+                        position: 'right'
+                    }
+                }
+            }
+        }));
+
+        charts.push(new Chart(vendasData, {
+            type:"line",
+            data:{labels:Object.keys(agrupar("data",x=>x.valor)),
+                  datasets:[{label:"Vendas por Data",data:Object.values(agrupar("data",x=>x.valor)), borderColor: '#9966ff', backgroundColor: '#9966ff'}]},
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Vendas por Data'
+                    },
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        }));
+
+        if ($.fn.dataTable.isDataTable("#tabela")) {
+            $("#tabela").DataTable().destroy();
+            $("#tabela").empty();
+        }
+
+        $("#tabela").DataTable({
+            data:dados,
+            columns:[
+                {title:"Produto",data:"produto"},
+                {title:"Fornecedor",data:"fornecedor"},
+                {title:"Status",data:"status"},
+                {title:"Data",data:"data"},
+                {title:"Quantidade",data:"quantidade"},
+                {title:"Valor (R$)",data:"valor"}
+            ]
+        });
+    }
+});
+</script>
+
+</body>
+</html>
